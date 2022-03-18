@@ -8,27 +8,41 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-        //Handles the text input for Assessment 1
-        string text = "nothing";
+        //Handles the t2ext input for Assessment 1
+        string? text = " ";
+        List<string> textList = new List<string>();
         
         //Method: manualTextInput
         //Arguments: none
         //Returns: string
         //Gets text input from the keyboard
-        public string manualTextInput()
+        public List<string> manualTextInput()
         {
+            do
+            {
 
-            return text;
+                Console.WriteLine("Enter a sentence (End Sentence with * to finish");
+                text = Console.ReadLine();
+                if(text == "")
+                {
+                    Console.WriteLine("Sentence cannot be empty.");
+                }
+                else
+                {
+                    this.textList.Add(text); 
+                }
+            } while (!text.EndsWith("*")) ;
+                return textList;
         }
 
         //Method: fileTextInput
         //Arguments: string (the file path)
         //Returns: string
         //Gets text input from a .txt file
-        public string fileTextInput(string fileName)
+        public List<string> fileTextInput(string fileName)
         {
 
-            return text;
+            return textList;
         }
 
     }

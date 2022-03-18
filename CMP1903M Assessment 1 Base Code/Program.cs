@@ -13,7 +13,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             //Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
-            List<string> fileContent = new List<string>();
+            List<string> fileContent;
             bool valid;
             //Create 'Input' object
             //Get either manually entered text, or text from a file
@@ -31,10 +31,14 @@ namespace CMP1903M_Assessment_1_Base_Code
                     switch (option)
                     {
                         case "1":
-                            fileContent.Add(input.manualTextInput());
+                            fileContent = input.manualTextInput();
+                            foreach (string item in fileContent)
+                            {
+                                Console.WriteLine(item);
+                            }
                             break;
                         case "2":
-                            fileContent.Add(input.fileTextInput("file"));
+                            fileContent = input.fileTextInput("file");
                             break;
                         case "0":
                             break;
