@@ -13,17 +13,41 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             //Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
-
+            List<string> fileContent = new List<string>();
+            bool valid;
             //Create 'Input' object
             //Get either manually entered text, or text from a file
             Input input = new Input();
-            Console.WriteLine("1. Do you want to enter the text via the keyboard?\n" +
-                              "2. Do you want to enter the text from a file?");
-            var option = Console.ReadKey();
-            if (option.KeyChar.ToString() == "1") Console.WriteLine("\n1 pressed");
-            //Console.WriteLine(option.KeyChar);
-
-            
+            do
+            {
+                Console.WriteLine(
+                    "1. Do you want to enter the text via the keyboard?\n"+
+                    "2. Do you want to enter the text from a file?\n"+
+                    "0. Do you want to Exit?\n");
+                try
+                {
+                    valid = true;
+                    var option = Console.ReadKey().KeyChar.ToString();
+                    switch (option)
+                    {
+                        case "1":
+                            fileContent.Add(input.manualTextInput());
+                            break;
+                        case "2":
+                            fileContent.Add(input.fileTextInput("file"));
+                            break;
+                        case "0":
+                            break;
+                        default:
+                            throw new Exception();
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("\nError: Input either \"1\" or \"0\"");
+                    valid = false;
+                }
+            } while (!valid);
 
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
