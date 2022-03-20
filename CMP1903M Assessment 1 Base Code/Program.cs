@@ -13,7 +13,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             //Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
-            List<string> fileContent;
+            List<string> fileContent = new List<string>();
             bool valid;
             //Create 'Input' object
             //Get either manually entered text, or text from a file
@@ -38,7 +38,8 @@ namespace CMP1903M_Assessment_1_Base_Code
                             }
                             break;
                         case "2":
-                            fileContent = input.fileTextInput("file");
+                            fileContent = input.fileTextInput();
+                            Console.WriteLine(fileContent[0]);
                             break;
                         case "0":
                             break;
@@ -55,13 +56,15 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
-
-
+            Analyse analyse = new Analyse();
             //Receive a list of integers back
+            List<int> values = analyse.analyseText(fileContent);
 
 
             //Report the results of the analysis
-
+            Report report = new Report(fileContent, values);
+            report.outputConsole();
+            report.outputFile();
 
             //TO ADD: Get the frequency of individual letters?
 
