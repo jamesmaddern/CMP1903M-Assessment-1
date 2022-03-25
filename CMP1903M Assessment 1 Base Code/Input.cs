@@ -7,16 +7,17 @@ using System.IO;
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
+    /// <summary>
+    /// Initialises a new Input Class
+    /// </summary>
     public class Input
-    {
-        //Handles the t2ext input for Assessment 1
+    {        
         string text = " ";
         List<string> textList = new List<string>();
-        
-        //Method: manualTextInput
-        //Arguments: none
-        //Returns: string
-        //Gets text input from the keyboard
+        /// <summary>
+        /// Requests manual text entry from the user.
+        /// </summary>
+        /// <returns>A list of strings, with each string being one user entered sentence</returns>
         public List<string> manualTextInput()
         {
             do
@@ -37,11 +38,10 @@ namespace CMP1903M_Assessment_1_Base_Code
             textList[textList.Count-1] = lastSentence.Remove(lastSentence.Length - 1);
             return textList;
         }
-
-        //Method: fileTextInput
-        //Arguments: string (the file path)
-        //Returns: file contents in a list
-        //Gets text input from a .txt file
+        /// <summary>
+        /// Gets text input from a .txt file
+        /// </summary>
+        /// <returns>A list of strings, with each string being a sentence from the file</returns>
         public List<string> fileTextInput()
         {
             
@@ -60,8 +60,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-            }
-    
+            }  
             
             return textList;
         }
