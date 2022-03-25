@@ -9,6 +9,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     class Program
     {
+        //additional comments needed (acn)
         static void Main()
         {
             //Local list of integers to hold the first five measurements of the text
@@ -20,16 +21,19 @@ namespace CMP1903M_Assessment_1_Base_Code
             Input input = new Input();
             do
             {
+                //acn
                 Console.WriteLine(
                     "1. Do you want to enter the text via the keyboard?\n"+
                     "2. Do you want to enter the text from a file?\n"+
                     "0. Do you want to Exit?\n");
                 try
                 {
+                    //acn
                     valid = true;
                     var option = Console.ReadKey().KeyChar.ToString();
                     switch (option)
                     {
+                        //acn
                         case "1":
                             fileContent = input.manualTextInput();
                             foreach (string item in fileContent)
@@ -46,12 +50,13 @@ namespace CMP1903M_Assessment_1_Base_Code
                             throw new Exception();
                     }
                 }
+                //acn
                 catch (Exception)
                 {
                     Console.WriteLine("\nError: Input either \"1\" or \"0\"");
                     valid = false;
                 }
-            } while (!valid);
+            } while (!valid); //acn
 
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
@@ -72,3 +77,11 @@ namespace CMP1903M_Assessment_1_Base_Code
     
     }
 }
+//overall you need to add more comments to overall code
+//to expalin functionaility, in addition youll need to 
+//add more feutures to analyse like the ones explained
+//in the brief and maybe letter frequency for example
+//lastly your code doesnt say where report is outputted 
+//when you choose to output as a txt file this could be
+//added also to improve the overall project
+// reviewed by Dominic Harris

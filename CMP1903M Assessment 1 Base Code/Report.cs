@@ -12,5 +12,8 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Maybe have different methods for different formats of output?
         //eg.   public void outputConsole(List<int>)
 
+
+        //report methods needed incase
+        //of errors so will catch them
     }
 }

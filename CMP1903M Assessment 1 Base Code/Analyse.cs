@@ -28,7 +28,9 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 values.Add(0);
             }
-
+            //more features are needed for anlysis for
+            //example the ones in the breif and letter
+            //frequency could be added and implemented
 
             return values;
         }

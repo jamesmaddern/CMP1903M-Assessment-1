@@ -8,7 +8,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-        //Handles the t2ext input for Assessment 1
+        //Handles the text input for Assessment 1
         string? text = " ";
         List<string> textList = new List<string>();
         
@@ -20,7 +20,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             do
             {
-
+                //acn
                 Console.WriteLine("Enter a sentence (End Sentence with * to finish");
                 text = Console.ReadLine();
                 if(text == "")
@@ -31,7 +31,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 {
                     this.textList.Add(text); 
                 }
-            } while (!text.EndsWith("*")) ;
+            } while (!text.EndsWith("*")) ; //acn
                 return textList;
         }
 
@@ -41,7 +41,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Gets text input from a .txt file
         public List<string> fileTextInput(string fileName)
         {
-
+            //acn
             return textList;
         }
 
