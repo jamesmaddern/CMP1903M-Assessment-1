@@ -8,13 +8,19 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Analyse
     {
+
+        private List<string> content;
         //Handles the analysis of text
 
+        public Analyse(List<string> input)
+        {
+            content = input;   
+        }
         //Method: analyseText
         //Arguments: string
         //Returns: list of integers
         //Calculates and returns an analysis of the text
-        public List<int> analyseText(List<string> input)
+        public Tuple<List<int>,List<string>> analyseText()
         {
             //List of integers to hold the first five measurements:
             //1. Number of sentences
@@ -30,7 +36,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 values.Add(0);
             }
 
-            foreach (string s in input)
+            foreach (string s in content)
             {
                 values[0]++;
                 for (int i = 0; i < s.Length; i++)
@@ -56,7 +62,22 @@ namespace CMP1903M_Assessment_1_Base_Code
                     }
                 }
             }
-            return values;
+            //List<string> longWords = getLongWords();
+                  
+            return Tuple.Create(values, getLongWords());
+        }
+        private List<string> getLongWords()
+        {
+            List<string> longWords = new List<string>();
+            foreach(string sentence in content)
+            {
+                foreach(string word in sentence.Split(' '))
+                    if(word.Length > 7)
+                    {
+                        longWords.Add(word);
+                    }
+            }
+            return longWords;
         }
     }
 }

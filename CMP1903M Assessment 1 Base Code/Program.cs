@@ -38,8 +38,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                             }
                             break;
                         case "2":
-                            fileContent = input.fileTextInput();
-                            Console.WriteLine(fileContent[0]);
+                            fileContent = input.fileTextInput();                            
                             break;
                         case "0":
                             break;
@@ -56,13 +55,13 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             //Create an 'Analyse' object
             //Pass the text input to the 'analyseText' method
-            Analyse analyse = new Analyse();
+            Analyse analyse = new Analyse(fileContent);
             //Receive a list of integers back
-            List<int> values = analyse.analyseText(fileContent);
+            (var value, var longWords) = analyse.analyseText();
 
 
             //Report the results of the analysis
-            Report report = new Report(fileContent, values);
+            Report report = new Report(fileContent, value, longWords);
             report.outputConsole();
             report.outputFile();
 
