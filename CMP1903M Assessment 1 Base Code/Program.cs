@@ -14,6 +14,10 @@ namespace CMP1903M_Assessment_1_Base_Code
             
             List<string> fileContent = new();
             bool valid;
+            int letterFreq;
+            string option = "";
+            char c;
+           
             //Create 'Input' object
             //Get either manually entered text, or text from a file
             Input input = new Input();
@@ -23,10 +27,12 @@ namespace CMP1903M_Assessment_1_Base_Code
                     "1. Do you want to enter the text via the keyboard?\n"+
                     "2. Do you want to enter the text from a file?\n"+
                     "0. Do you want to Exit?\nChoice: ");
+                string[] inputList = {"1","2","0"};
                 try
                 {
                     valid = true;
-                    var option = Console.ReadKey().KeyChar.ToString();
+                    option = Console.ReadKey().KeyChar.ToString();
+                    
                     Console.WriteLine();
                     switch (option)
                     {
@@ -37,14 +43,21 @@ namespace CMP1903M_Assessment_1_Base_Code
                             fileContent = input.fileTextInput();                            
                             break;
                         case "0":
+                            Environment.Exit(0);
                             break;
                         default:
-                            throw new Exception();
+                            string s = "Error: Invalid Input\nValid Inputs Include: ";
+                            foreach (string i in inputList)
+                            {
+                                s += i + "\n";
+                            }
+                            throw new InvalidInputException(generateErrorMessage(inputList));
                     }
                 }
-                catch (Exception)
+                catch (InvalidInputException e)
                 {
-                    Console.WriteLine("\nError: Input either \"1\" or \"0\"");
+                    
+                    Console.WriteLine(e.Message);
                     valid = false;
                 }
             } while (!valid);
@@ -54,16 +67,58 @@ namespace CMP1903M_Assessment_1_Base_Code
             Analyse analyse = new Analyse(fileContent);
             //Receive a list of integers back
             (var value, var longWords) = analyse.analyseText();
+            Report report = null;
+            do
+            {
+                string[] inputList = { "y", "n" };
+                try
+                {
+                    valid = true;
+                    Console.WriteLine("Generate letter frequency analysis? (y/n)");
+                    option = Console.ReadKey().KeyChar.ToString();
+                    Console.WriteLine();
+                    switch (option)
+                    {
+                        case "y":
+                            Console.WriteLine("Enter a letter to be counted");
+                            c = Console.ReadKey().KeyChar;
+                            letterFreq = analyse.getCharFreq(c);
+                            report = new Report(fileContent, value, longWords, c, letterFreq);
+                            break;
+                        case "n":
+                            //Report the results of the analysis
+                            report = new Report(fileContent, value, longWords);
+                            break;
+                        default:
+                            
+                            throw new InvalidInputException(generateErrorMessage(inputList));
+
+                    }
+                }
+                catch (InvalidInputException e)
+                {
+                    Console.WriteLine(e.Message);
+                    valid = false;
+                }
+            } while (!valid);
 
 
-            //Report the results of the analysis
-            Report report = new Report(fileContent, value, longWords);
+            
             report.outputConsole();
             report.outputFile();
 
             //TO ADD: Get the frequency of individual letters?
 
            
+        }
+        static string generateErrorMessage(string[] inputList)
+        {
+            string s = "Error: Invalid Input\nValid Inputs Include:\n";
+            foreach (string i in inputList)
+            {
+                s += i + "\n";
+            }
+            return s;
         }
         
         
