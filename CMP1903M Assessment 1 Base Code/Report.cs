@@ -10,6 +10,7 @@ namespace CMP1903M_Assessment_1_Base_Code
     
     class Report
     {
+        //Encapsulation
         private string s;
         private string s2;
         private List<string> _content;
@@ -29,6 +30,9 @@ namespace CMP1903M_Assessment_1_Base_Code
             _content.Add(s);
 
         }
+        /**
+                ADDITIONAL METHOD - Overload method
+         */
         /// <summary>
         /// Creates a report object with letter frequency analysis
         /// </summary>
@@ -55,21 +59,25 @@ namespace CMP1903M_Assessment_1_Base_Code
             string path = Directory.GetCurrentDirectory();
             string fileName = "\\textAnalysis.txt";
             File.WriteAllLines(path+fileName, _content);
+            //Abstraction
             outputLongWords(path);
+            Console.WriteLine($"Analysis File Generated at location:\n{path}{fileName}");
         }
         /// <summary>
         /// Outputs the List of Long Words to a file
         /// </summary>
         /// <param name="path">The directory to save the file to.</param>
         private void outputLongWords(string path)
-        {
-            File.WriteAllLines(path + "\\longWords.txt", _longWords);
+        {           
+            File.WriteAllLines(path + "\\longWords.txt", _longWords);            
+            Console.WriteLine($"Long Words File Generated at location:\n{path}\\longWords.txt");
         }
         /// <summary>
         /// Outputs file content and analysis to the Console.
         /// </summary>
         public void outputConsole()
         {
+            Console.WriteLine();
             foreach(string value in _content)
             {
                 Console.WriteLine(value);

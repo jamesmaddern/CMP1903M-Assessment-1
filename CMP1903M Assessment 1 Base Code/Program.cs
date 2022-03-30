@@ -26,8 +26,9 @@ namespace CMP1903M_Assessment_1_Base_Code
                 Console.Write(
                     "1. Do you want to enter the text via the keyboard?\n"+
                     "2. Do you want to enter the text from a file?\n"+
+                    "3. Do you want to Test this program using the Assessment 1 Test File?\n" +
                     "0. Do you want to Exit?\nChoice: ");
-                string[] inputList = {"1","2","0"};
+                string[] inputList = {"1","2","3","0"};
                 try
                 {
                     valid = true;
@@ -41,6 +42,10 @@ namespace CMP1903M_Assessment_1_Base_Code
                             break;
                         case "2":
                             fileContent = input.fileTextInput();                            
+                            break;
+                        case "3":
+                            Test test = new Test();
+                            test.test();
                             break;
                         case "0":
                             Environment.Exit(0);
@@ -62,55 +67,62 @@ namespace CMP1903M_Assessment_1_Base_Code
                 }
             } while (!valid);
 
-            //Create an 'Analyse' object
-            //Pass the text input to the 'analyseText' method
-            Analyse analyse = new Analyse(fileContent);
-            //Receive a list of integers back
-            (var value, var longWords) = analyse.analyseText();
-            Report report = null;
-            do
+            if (fileContent.Count > 0)
             {
-                string[] inputList = { "y", "n" };
-                try
+
+
+                //Create an 'Analyse' object
+                //Pass the text input to the 'analyseText' method
+                Analyse analyse = new Analyse(fileContent);
+                //Receive a list of integers back
+                (var value, var longWords) = analyse.analyseText();
+                Report report = null;
+                do
                 {
-                    valid = true;
-                    Console.WriteLine("Generate letter frequency analysis? (y/n)");
-                    option = Console.ReadKey().KeyChar.ToString();
-                    Console.WriteLine();
-                    switch (option)
+                    string[] inputList = { "y", "n" };
+                    try
                     {
-                        case "y":
-                            Console.WriteLine("Enter a letter to be counted");
-                            c = Console.ReadKey().KeyChar;
-                            letterFreq = analyse.getCharFreq(c);
-                            report = new Report(fileContent, value, longWords, c, letterFreq);
-                            break;
-                        case "n":
-                            //Report the results of the analysis
-                            report = new Report(fileContent, value, longWords);
-                            break;
-                        default:
-                            
-                            throw new InvalidInputException(generateErrorMessage(inputList));
+                        valid = true;
+                        Console.WriteLine("Generate letter frequency analysis? (y/n)");
+                        option = Console.ReadKey().KeyChar.ToString();
+                        Console.WriteLine();
+                        switch (option)
+                        {
+                            case "y":
+                                Console.WriteLine("Enter a letter to be counted");
+                                c = Console.ReadKey().KeyChar;
+                                letterFreq = analyse.getCharFreq(c);
+                                report = new Report(fileContent, value, longWords, c, letterFreq);
+                                break;
+                            case "n":
+                                //Report the results of the analysis
+                                report = new Report(fileContent, value, longWords);
+                                break;
+                            default:
 
+                                throw new InvalidInputException(generateErrorMessage(inputList));
+
+                        }
                     }
-                }
-                catch (InvalidInputException e)
-                {
-                    Console.WriteLine(e.Message);
-                    valid = false;
-                }
-            } while (!valid);
-
-
-            
-            report.outputConsole();
-            report.outputFile();
-
-            //TO ADD: Get the frequency of individual letters?
-
+                    catch (InvalidInputException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        valid = false;
+                    }
+                } while (!valid);
+                report.outputConsole();
+                report.outputFile();
+            }
+            Console.Write("Press Any Key to Exit...");
+            Console.ReadKey();
            
         }
+        
+        /// <summary>
+        /// Generates the error message to be passed to the Exception class
+        /// </summary>
+        /// <param name="inputList">list of possible inputs for the user</param>
+        /// <returns>Error Message</returns>
         static string generateErrorMessage(string[] inputList)
         {
             string s = "Error: Invalid Input\nValid Inputs Include:\n";
@@ -120,8 +132,5 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
             return s;
         }
-        
-        
-    
     }
 }
