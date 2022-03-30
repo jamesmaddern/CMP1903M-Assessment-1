@@ -49,17 +49,21 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 Console.WriteLine("Enter the file path: ");
                 string path = Console.ReadLine();
-                //string path = Directory.GetCurrentDirectory();
-                string file = File.ReadAllText(path);
-                string[] fileSplit = file.Split('.');
-                foreach (string line in fileSplit)
+                if (path.EndsWith(".txt"))
                 {
-                    if(!(line == string.Empty)) textList.Add(line);
+                    //string path = Directory.GetCurrentDirectory();
+                    string file = File.ReadAllText(path);
+                    string[] fileSplit = file.Split('.');
+                    foreach (string line in fileSplit)
+                    {
+                        if (!(line == string.Empty)) textList.Add(line);
+                    }
                 }
+                else { throw new Exception(); }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.Write(ex.Message);
+                Console.Write("Invalid Path or File Type");
             }  
             
             return textList;
