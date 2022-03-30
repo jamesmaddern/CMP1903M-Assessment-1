@@ -74,7 +74,9 @@ namespace CMP1903M_Assessment_1_Base_Code
             }                  
             return Tuple.Create(values, getLongWords());
         }
-
+        /**
+                ADDITIONAL METHOD
+         */
         /// <summary>
         /// Creates and returns a list of words longer than 7 characters
         /// </summary>
@@ -93,6 +95,29 @@ namespace CMP1903M_Assessment_1_Base_Code
                     }
             }
             return longWords;
+        }
+        /**
+                ADDITIONAL METHOD
+         */
+        /// <summary>
+        /// Calculates frequency of a given letter
+        /// </summary>
+        /// <param name="givenC">Character to be counted</param>
+        /// <returns>Frequency of given letter</returns>
+        public int getCharFreq(Char givenC)
+        {
+            int freq = 0;
+            foreach(string line in content)
+            {
+                foreach(char c in line)
+                {
+                    if(Char.ToLower(c) == givenC)
+                    {
+                        freq++;
+                    }
+                }
+            }
+            return freq;
         }
     }
 }

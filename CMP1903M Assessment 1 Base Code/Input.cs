@@ -22,7 +22,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             do
             {
-                Console.WriteLine("Enter a sentence (End Sentence with * to finish");
+                Console.WriteLine("Enter a sentence (End Sentence with * to finish)");
                 text = Console.ReadLine();
                 if(text == "")
                 {
@@ -54,7 +54,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 string[] fileSplit = file.Split('.');
                 foreach (string line in fileSplit)
                 {
-                    textList.Add(line);
+                    if(!(line == string.Empty)) textList.Add(line);
                 }
             }
             catch (Exception ex)
@@ -62,6 +62,21 @@ namespace CMP1903M_Assessment_1_Base_Code
                 Console.Write(ex.Message);
             }  
             
+            return textList;
+        }
+        /// <summary>
+        /// Gets the text input from a given path
+        /// </summary>
+        /// <param name="path">Path of the text file</param>
+        /// <returns>A list of strings, with each string being a sentence from the file</returns>
+        public List<string> fileTextInput(string path)
+        {            
+            string file = File.ReadAllText(path);
+            string[] fileSplit = file.Split('.');
+            foreach (string line in fileSplit)
+            {
+                if (!(line == string.Empty)) textList.Add(line);
+            }
             return textList;
         }
 
